@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
 import Filters from "../Filters/Filters"
+import DogCard from "../DogCard/DogCard";
 
 function BrowsePage({ favoritesIds, setFavoritesIds }) {
 
@@ -11,7 +12,6 @@ function BrowsePage({ favoritesIds, setFavoritesIds }) {
     const pageSize = 10;
     const [sortField, setSortField] = useState('breed');
     const [sortOrder, setSortOrder] = useState('asc');
-    // const [favoritesIds, setFavoritesIds] = useState([]);
 
     useEffect(() => {
         fetch('https://frontend-take-home-service.fetch.com/dogs/breeds', {
@@ -83,21 +83,12 @@ function BrowsePage({ favoritesIds, setFavoritesIds }) {
             {/* displayed dogs */}
             <ul>
                 {dogs.map((dog) => (
-                <li key={dog.id}>
-                    <img src={dog.img} alt={dog.name} />
-                    <div>
-                    <strong>{dog.name}</strong> ({dog.breed})
-                    </div>
-                    <div>Age: {dog.age}</div>
-                    <div>Zip Code: {dog.zip_code}</div>
-
-                    <button onClick={() => toggleFavorite(dog.id)} >
-                        {favoritesIds.includes(dog.id)
-                            ? 'Unfavorite </3'
-                            : 'Favorite <3'
-                        }
-                    </button>
-                </li>
+                    <DogCard
+                        key={dog.id}
+                        dog={dog}
+                        isFavorite={favoritesIds.includes(dog.id)}
+                        onToggleFavorite={toggleFavorite}
+                    />
                 ))}
             </ul>
             

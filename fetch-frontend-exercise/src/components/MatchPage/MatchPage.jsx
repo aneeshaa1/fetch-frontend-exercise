@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Favorites from "../Favorites/Favorites"
 
-function MatchPage({ favoritesIds}) {
+function MatchPage({ favoritesIds, setFavoritesIds}) {
 
     const [matchedDog, setMatchedDog] = useState(null);
 
@@ -36,7 +36,11 @@ function MatchPage({ favoritesIds}) {
                 ) 
                 : (
                     <>
-                        <Favorites dogIds={favoritesIds} />
+                        <Favorites 
+                            dogIds={favoritesIds}
+                            favoritesIds={favoritesIds}
+                            setFavoritesIds={setFavoritesIds}
+                        />
                         <button onClick={handleMatch}>
                             Generate Match
                         </button>

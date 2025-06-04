@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react"
+import DogCard  from "../DogCard/DogCard";
 
-function Favorites({dogIds}) {
+function Favorites({dogIds, favoritesIds, setFavoritesIds}) {
 
     const [dogs, setDogs] = useState([]);
 
@@ -18,17 +19,23 @@ function Favorites({dogIds}) {
             .then((data) => setDogs(data));
     }, [dogIds]);
 
+    const toggleFavorite = (dogId) => {
+        setFavoritesIds((prev) =>
+            prev.includes(dogId)
+                ? prev.filter((id) => id !== dogId)
+                : [...prev, dogId]
+        );
+    };
+
     return(
         <ul>
             {dogs.map((dog) => (
-                <li key={dog.id}>
-                    <img src={dog.img} alt={dog.name} />
-                    <div>
-                        <strong>{dog.name}</strong> ({dog.breed})
-                    </div>
-                    <div>Age: {dog.age}</div>
-                    <div>Zip Code: {dog.zip_code}</div>
-                </li>
+                <DogCard
+                    key={dog.id}
+                    dog={dog}
+                    isFavorite={favoritesIds.includes(dog.id)}
+                    onToggleFavorite={toggleFavorite}
+                />
             ))}
         </ul>
     )

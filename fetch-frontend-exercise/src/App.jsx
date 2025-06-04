@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path='/' element={<LoginPage/>} />
         <Route path='/browse' element={<BrowsePage favoritesIds={favoritesIds} setFavoritesIds={setFavoritesIds}/>} />
-        <Route path='/match' element={<MatchPage favoritesIds={favoritesIds}/>} />
+        <Route path='/match' element={<MatchPage favoritesIds={favoritesIds} setFavoritesIds={setFavoritesIds}/>} />
       </Routes>
     </BrowserRouter>
   )
