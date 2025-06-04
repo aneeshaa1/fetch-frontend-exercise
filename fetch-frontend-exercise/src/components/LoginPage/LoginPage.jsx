@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import './LoginPage.css'
 
 function LoginPage() {
 
@@ -25,28 +26,35 @@ function LoginPage() {
     };
 
     return (
-        <div>
-            <h1>Login Page</h1>
+        <div className="login-background">
+            <div className="login-content">
+                <h1>Dog Finder</h1>
 
-            <input
-                type="text"
-                placeholder="name"
-                value={name}
-                onChange={e => setName(e.target.value)}
-            />
+                <div className="login-container">
+                    <input
+                        type="text"
+                        placeholder="name"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                    />
 
-            <br></br>
+                    <br></br>
 
-            <input
-                type="email"
-                placeholder="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-            />
+                    <input
+                        type="email"
+                        placeholder="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
 
-            <br></br>
+                    <br></br>
 
-            <button onClick={handleLogin}>Login</button>
+                    <button onClick={handleLogin}>login</button>
+                </div>
+            </div>
+            
+
+            
 
         </div>
     )
