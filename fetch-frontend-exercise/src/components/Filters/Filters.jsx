@@ -10,10 +10,13 @@ function Filters({
     onSortOrderChange
 })  {
 
+    // update selected breeds
     const handleBreedChange = (e) => {
         const value = e.target.value;
         onSelectedBreedsChange((prev) => 
-            e.target.checked ? [...prev, value] : prev.filter((b) => b !== value)
+            e.target.checked 
+                ? [...prev, value] 
+                : prev.filter((b) => b !== value)
         );
     };
 

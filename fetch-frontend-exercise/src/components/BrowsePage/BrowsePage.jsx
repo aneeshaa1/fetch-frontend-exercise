@@ -11,6 +11,7 @@ function BrowsePage() {
     const pageSize = 10;
     const [sortField, setSortField] = useState('breed');
     const [sortOrder, setSortOrder] = useState('asc');
+    const [favoritesIds, setFavoritesIds] = useState([]);
 
     useEffect(() => {
         fetch('https://frontend-take-home-service.fetch.com/dogs/breeds', {
@@ -57,6 +58,14 @@ function BrowsePage() {
         .then(setDogs);
     };
 
+    const toggleFavorite = (dogId) => {
+        setFavoritesIds((prev) =>
+            prev.includes(dogId)
+                ? prev.filter((id) => id !== dogId)
+                : [...prev, dogId]
+        );
+    };
+
     return (
         <div>
             <h2>Dog Search</h2>
@@ -71,6 +80,7 @@ function BrowsePage() {
                 onSortOrderChange={setSortOrder}
             />
 
+            {/* displayed dogs */}
             <ul>
                 {dogs.map((dog) => (
                 <li key={dog.id}>
@@ -80,10 +90,18 @@ function BrowsePage() {
                     </div>
                     <div>Age: {dog.age}</div>
                     <div>Zip Code: {dog.zip_code}</div>
+
+                    <button onClick={() => toggleFavorite(dog.id)} >
+                        {favoritesIds.includes(dog.id)
+                            ? 'Unfavorite </3'
+                            : 'Favorite <3'
+                        }
+                    </button>
                 </li>
                 ))}
             </ul>
-
+            
+            {/* page navigation */}
             <div>
                 <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0}>
                     Previous
