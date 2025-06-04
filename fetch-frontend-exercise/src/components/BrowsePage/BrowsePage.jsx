@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import Filters from "../Filters/Filters"
 
-function BrowsePage() {
+function BrowsePage({ favoritesIds, setFavoritesIds }) {
 
     const [breeds, setBreeds] = useState([]);
     const [selectedBreeds, setSelectedBreeds] = useState([]);
@@ -11,7 +11,7 @@ function BrowsePage() {
     const pageSize = 10;
     const [sortField, setSortField] = useState('breed');
     const [sortOrder, setSortOrder] = useState('asc');
-    const [favoritesIds, setFavoritesIds] = useState([]);
+    // const [favoritesIds, setFavoritesIds] = useState([]);
 
     useEffect(() => {
         fetch('https://frontend-take-home-service.fetch.com/dogs/breeds', {
