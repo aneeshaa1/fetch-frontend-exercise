@@ -1,4 +1,5 @@
 import React from "react"
+import './Filters.css'
 
 function Filters({
     breeds, 
@@ -21,26 +22,12 @@ function Filters({
     };
 
     return (
-        <div>
+        <div className="filters-sidebar">
             <h2>Filters</h2>
 
-            <h4>Select Breeds:</h4>
-
-            {breeds.map((breed) => (
-                <label key={breed}>
-                    <input
-                        type="checkbox"
-                        value={breed}
-                        checked={selectedBreeds.includes(breed)}
-                        onChange={handleBreedChange}
-                    />
-                    {breed}
-                </label>
-            ))}
-
-            <div>
+            <div className="sort-controls">
                 <label>
-                    Sort By:&nbsp;
+                    <strong>Sort By:</strong>
                     <select value={sortField} onChange={(e) => onSortFieldChange(e.target.value)}>
                         <option value="breed">Breed</option>
                         <option value="name">Name</option>
@@ -49,13 +36,30 @@ function Filters({
                 </label>
 
                 <label>
-                    Order:&nbsp;
+                    <strong>Order:</strong>
                     <select value={sortOrder} onChange={(e) => onSortOrderChange(e.target.value)}>
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
                     </select>
                 </label>
             </div>
+
+            <h4>Select Breeds:</h4>
+
+            <div className="breed-list">
+                {breeds.map((breed) => (
+                    <label key={breed}>
+                        <input
+                            type="checkbox"
+                            value={breed}
+                            checked={selectedBreeds.includes(breed)}
+                            onChange={handleBreedChange}
+                        />
+                        {breed}
+                    </label>
+                ))}
+            </div>
+
 
         </div>
     );
