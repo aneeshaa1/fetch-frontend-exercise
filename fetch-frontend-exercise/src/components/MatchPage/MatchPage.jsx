@@ -1,9 +1,21 @@
 import React, { useState } from "react"
 import Favorites from "../Favorites/Favorites"
+import './MatchPage.css'
+import { useNavigate } from "react-router-dom";
+import DogCard from "../DogCard/DogCard";
 
 function MatchPage({ favoritesIds, setFavoritesIds}) {
 
     const [matchedDog, setMatchedDog] = useState(null);
+    const navigate = useNavigate();
+
+    const toggleFavorite = (dogId) => {
+        setFavoritesIds((prev) =>
+          prev.includes(dogId)
+            ? prev.filter((id) => id !== dogId)
+            : [...prev, dogId]
+        );
+    };
 
     const handleMatch = () => {
         fetch('https://frontend-take-home-service.fetch.com/dogs/match', {
@@ -27,8 +39,15 @@ function MatchPage({ favoritesIds, setFavoritesIds}) {
     }
 
     return(
-        <div>
-            <h1>Match Page</h1>
+        <div className="match-page">
+
+            <div className="match-header">
+                <h1>Match Page</h1>
+
+                <button onClick={() => navigate('/browse')} >Back to Browse</button>
+            </div>
+
+
 
             {favoritesIds.length === 0 
                 ? (
@@ -36,29 +55,36 @@ function MatchPage({ favoritesIds, setFavoritesIds}) {
                 ) 
                 : (
                     <>
-                        <Favorites 
+                        <button onClick={handleMatch}>
+                            Generate Match
+                        </button>
+
+                        {matchedDog && (
+                            <div className="match-result">
+                                <h3>Your Match:</h3>
+                                <ul>
+                                    <DogCard
+                                        dog={matchedDog}
+                                        isFavorite={favoritesIds.includes(matchedDog.id)}
+                                        onToggleFavorite={toggleFavorite}
+                                    />
+                                </ul>
+                            </div>
+                        )}
+
+                        <h2>Favorites:</h2>
+                
+                        <Favorites
                             dogIds={favoritesIds}
                             favoritesIds={favoritesIds}
                             setFavoritesIds={setFavoritesIds}
                         />
-                        <button onClick={handleMatch}>
-                            Generate Match
-                        </button>
+                        
                     </>
                 )
             }
 
-            {matchedDog && (
-                <div>
-                    <h3>Your Match 🐾</h3>
-                    <img src={matchedDog.img} alt={matchedDog.name}/>
-                    <div>
-                        <strong>{matchedDog.name}</strong> ({matchedDog.breed})
-                    </div>
-                    <div>Age: {matchedDog.age}</div>
-                    <div>Zip Code: {matchedDog.zip_code}</div>
-                </div>
-            )}
+            
 
         </div>
     )

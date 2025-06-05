@@ -1,0 +1,45 @@
+.dog-card {
+    list-style: none;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin: 1rem 0;
+    max-width: 10rem;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    transition: transform 0.2s ease;
+}
+  
+.dog-card:hover {
+    transform: translateY(-4px);
+}
+  
+.dog-card img {
+    width: 100%;
+    height: 10em;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+}
+  
+.dog-card .favorite-button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #e6e6e6;
+    color: rgb(53, 53, 53);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+  
+.dog-card button:hover {
+    background-color: #ff6f91;
+}
+
+.favorite-button.active {
+    background-color: #ff9a9e;
+    color: rgb(255, 255, 255);
+}

@@ -1,0 +1,40 @@
+.browse-page {
+    margin-top: 0;
+    margin-left: 18rem;
+    padding: 1rem 1rem 1rem 4rem;
+    background-color: #ffeaea;
+    min-height: 100vh;
+    width: 74vw;
+    height: 100%;
+}
+
+.browse-page h1 {
+    margin:0;
+}
+
+.browse-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    padding: 0;
+    margin: 2rem 0;
+    list-style: none;
+}
+  
+@media (min-width: 1200px) {
+    ul {
+      grid-template-columns: repeat(5, 1fr); /* max 5 per row */
+    }
+}
+
+.browse-page .page-btn button {
+    margin: 0 1em 0 1rem;
+    width: 10em;
+}

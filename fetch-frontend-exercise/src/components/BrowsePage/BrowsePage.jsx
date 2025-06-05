@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react"
 import Filters from "../Filters/Filters"
 import DogCard from "../DogCard/DogCard";
+import './BrowsePage.css'
+import { useNavigate } from "react-router-dom";
 
 function BrowsePage({ favoritesIds, setFavoritesIds }) {
 
@@ -9,9 +11,10 @@ function BrowsePage({ favoritesIds, setFavoritesIds }) {
     const [dogIds, setDogIds] = useState([]);
     const [dogs, setDogs] = useState([]);
     const [page, setPage] = useState(0);
-    const pageSize = 10;
+    const pageSize = 20;
     const [sortField, setSortField] = useState('breed');
     const [sortOrder, setSortOrder] = useState('asc');
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('https://frontend-take-home-service.fetch.com/dogs/breeds', {
@@ -67,8 +70,17 @@ function BrowsePage({ favoritesIds, setFavoritesIds }) {
     };
 
     return (
-        <div>
-            <h2>Dog Search</h2>
+        <div className="browse-page">
+
+            <div className="browse-header">
+                <h1>Dog Search</h1>
+
+                <button onClick={() => {navigate('/match')}} >
+                    Find A Match
+                </button>
+            </div>
+
+
 
             <Filters
                 breeds={breeds}
@@ -93,7 +105,7 @@ function BrowsePage({ favoritesIds, setFavoritesIds }) {
             </ul>
             
             {/* page navigation */}
-            <div>
+            <div className="page-btn">
                 <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0}>
                     Previous
                 </button>
